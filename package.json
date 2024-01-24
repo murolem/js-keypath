@@ -1,0 +1,41 @@
+{
+  "name": "js-keypath",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "postinstall": "npx commitizen init cz-conventional-changelog --save-dev --save-exact --force",
+    "typecheck": "tsc",
+    "test": "concurrently 'npm:test:regular' 'npm:test:types'",
+    "test:regular": "vitest",
+    "test:types": "vitest --typecheck.enabled --typecheck.only",
+    "diff": "npm run typecheck && vite-node ./src/diff.ts",
+    "merge": "npm run typecheck && vite-node ./src/merge.ts",
+    "sendit": "npm run add && npm run commit && npm run push",
+    "add": "git add .",
+    "commit": "cz",
+    "push": "git push origin"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^20.11.5",
+    "commander": "^11.1.0",
+    "concurrently": "^8.2.2",
+    "cz-conventional-changelog": "^3.3.0",
+    "rollup-plugin-cleanup": "^3.2.1",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.11",
+    "vite-node": "^1.2.1",
+    "vite-tsconfig-paths": "^4.3.1",
+    "vitest": "^1.2.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "fs-extra": "^11.2.0",
+    "zod": "^3.22.4"
+  }
+}
